@@ -12,43 +12,55 @@ struct CustomComposableView: View {
     
     //MARK: stored properties
     
-    // control the horizontal offset
+    // Control the horizontal offset
     @State private var offset = 0.0
-    @State private var offsety = 50.0
+    
+    @State private var offsety = 75.0
+    
+    @State var randomColour: Color = .blue
     
     //MARK: control the rotation angle
+    
     @State var currentRotationAngle = Angle.degrees(0)
     
+    //MARK: control wether or not it is touching the frame
+    
+    @State var touchingBoarder = false
     
     var body: some View {
+        
         ZStack{
             Circle()
-                .frame(width: 50, height: 50)
+                .opacity(0.0)
             
-            Text("OK")
-                .foregroundColor(.white)
+            
+            Text("CLICK ME")
+                .foregroundColor(randomColour)
+                .font(.largeTitle)
+                .bold()
+                .shadow(color: .black, radius: 1.5, x: 0, y: 0)
         }
+        
+        
+        // Rotate the cirlce around the centre with the rotation angle
         .rotationEffect(currentRotationAngle, anchor: .center)
         .offset(x: offset, y: offsety)
-       
-      
-       
-        .animation(Animation.easeInOut(duration: 1.0))
-       
         
+        // Animate the movement/ofset
+        .animation(.interpolatingSpring(stiffness: 10, damping: 4))
+     
         
-        // Once tapped
+        // try to get this to run when it hits the boarder of the phone.
+        // MARK: Once tapped
         .onTapGesture {
-          
-            // Rotate a full rotation
-            currentRotationAngle += .degrees(360)
             
             //Allow the offset to be changed randomly
-            offset = Double.random(in: 5...95)
-            offsety = Double.random(in: 20...80)
-        
-           
+            offset = Double.random(in: -99...99)
+            offsety = Double.random(in: -99...99)
+            //set random colour to be actually randomly selected
+            randomColour = Color(hue: Double.random(in: 1...360) / 360.0, saturation: 1, brightness: 1)
         }
+        
         
     }
 }
