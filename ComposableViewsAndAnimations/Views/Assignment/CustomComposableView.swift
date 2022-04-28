@@ -33,7 +33,7 @@ struct CustomComposableView: View {
     
    
     
-    let timer = Timer.publish(every: 2.0, on: .main, in: .common).autoconnect()
+    let timer = Timer.publish(every: 1.5, on: .main, in: .common).autoconnect()
     var body: some View {
         
 //        TextField("enter word", text: message)
@@ -63,7 +63,7 @@ struct CustomComposableView: View {
         .onReceive(timer) { input in
             
             //Allow the offset to be changed randomly
-            offset = Double.random(in: -99...99)
+            offset = Double.random(in: -85...85)
             offsety = Double.random(in: -150...200)
             //set random colour to be actually randomly selected
             randomColour = Color(hue: Double.random(in: 1...360) / 360.0, saturation: 1, brightness: 1)
