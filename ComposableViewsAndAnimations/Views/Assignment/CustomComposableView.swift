@@ -11,6 +11,10 @@ import SwiftUI
 struct CustomComposableView: View {
     
     //MARK: stored properties
+   
+    
+    let message : String
+    
     
     // Control the horizontal offset
     @State private var offset = 0.0
@@ -27,14 +31,18 @@ struct CustomComposableView: View {
     
     @State var touchingBoarder = false
     
+   
+    
+    let timer = Timer.publish(every: 2.0, on: .main, in: .common).autoconnect()
     var body: some View {
         
+//        TextField("enter word", text: message)
         ZStack{
             Circle()
                 .opacity(0.0)
             
             
-            Text("CLICK ME")
+            Text(message)
                 .foregroundColor(randomColour)
                 .font(.largeTitle)
                 .bold()
@@ -52,21 +60,21 @@ struct CustomComposableView: View {
         
         // try to get this to run when it hits the boarder of the phone.
         // MARK: Once tapped
-        .onTapGesture {
+        .onReceive(timer) { input in
             
             //Allow the offset to be changed randomly
             offset = Double.random(in: -99...99)
-            offsety = Double.random(in: -99...99)
+            offsety = Double.random(in: -150...200)
             //set random colour to be actually randomly selected
             randomColour = Color(hue: Double.random(in: 1...360) / 360.0, saturation: 1, brightness: 1)
         }
-        
+     
         
     }
 }
 
 struct CustomComposableView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomComposableView()
+        CustomComposableView(message: "")
     }
 }

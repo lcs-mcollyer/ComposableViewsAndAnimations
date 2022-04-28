@@ -19,24 +19,26 @@ struct CustomComposableDescriptionView: View {
             
             Group {
                 
-                Text("Description")
+                Text("Transitional Screen")
                     .font(.title2)
                     .bold()
                     .padding(.top)
                 
                 Text("""
-                    Replace this with a description of how to use this view.
-
-                    If the view accepts a parameter, provide a control to enter the input below.
+                    This view allows the user to utilize user input into a loading or transialtion screen.
+                    
+                    The way in wich i see this best utilized is through usernames.
+                    
+                    I believe that if the app reaquires a user to log in, that this would be a fantasitc transition screen into the app.
                     """)
                 
-                TextField("Enter an input value", text: $phrase)
+                TextField("Enter Username...", text: $phrase)
                 
             }
             .padding(.bottom)
             
             List {
-                NavigationLink(destination: CustomComposableView()) {
+                NavigationLink(destination: CustomComposableView(message: phrase)) {
                     SimpleListItemView(title: "My Composable View",
                                        caption: "A brief description of my view")
                 }
