@@ -96,6 +96,13 @@ struct ContentView: View {
                                            caption: "Make your own reusable view using animations")
 
                     }
+                    
+                    NavigationLink(destination: CustomComposableDescriptionView2()) {
+                        
+                        SimpleListItemView(title: "Create a composable view",
+                                           caption: "Make your own reusable view using animations")
+
+                    }
 
                 }
                 
